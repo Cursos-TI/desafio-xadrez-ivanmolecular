@@ -1,54 +1,65 @@
 #include <stdio.h>
 
+// Funcao recursiva para o movimento do Bispo
+void movimentoBispo(int movimento) {
+    if (movimento > 5) {
+        return; // Termina quando ja tiver feito 5 movimentos
+    }
+    printf("Movimento %d - Diagonal Direita\n", movimento);
+    movimentoBispo(movimento + 1); // Chama a funcao recursivamente
+}
+
+// Funcao recursiva para o movimento da Torre
+void movimentoTorre(int movimento) {
+    if (movimento > 5) {
+        return; // Termina quando ja tiver feito 5 movimentos
+    }
+    printf("Movimento %d - Direita\n", movimento);
+    movimentoTorre(movimento + 1); // Chama a funcao recursivamente
+}
+
+// Funcao recursiva para o movimento da Rainha
+void movimentoRainha(int movimento) {
+    if (movimento > 8) {
+        return; // Termina quando ja tiver feito 8 movimentos
+    }
+    printf("Movimento %d - Esquerda\n", movimento);
+    movimentoRainha(movimento + 1); // Chama a funcao recursivamente
+}
+
+// Funcao recursiva para o movimento do Cavalo
+void movimentoCavalo(int movimento, int passos) {
+    if (movimento > 1) {
+        return; // Termina apos o movimento inicial
+    }
+    int i;
+    // Movimento para cima (1 vez)
+    printf("Movimento %d - Cima\n", passos);
+    // Movimento para direita (2 vezes)
+    for (i = 1; i <= 2; i++) {
+        printf("Movimento %d - Direita\n", passos + i);
+    }
+    movimentoCavalo(movimento + 1, passos + 3); // Chama a funcao recursivamente
+}
+
 int main() {
-    // Movimento da TORRE usando FOR
-    // A Torre vai se mover 5 casas para a direita
-    int i1;
-    printf("Movimento da Torre:\n");
-    for (i1 = 1; i1 <= 5; i1++) {
-        printf("Movimento %d - Direita\n", i1);
-    }
-
-    printf("\n"); // Separador visual
-
-    // Movimento do BISPO usando WHILE
-    // O Bispo vai se mover 5 casas na diagonal para cima e à direita
-    int i2 = 1;
     printf("Movimento do Bispo:\n");
-    while (i2 <= 5) {
-        printf("Movimento %d - Diagonal Direito\n", i2);
-        i2++;
-    }
+    movimentoBispo(1); // Inicia o movimento do Bispo
 
     printf("\n"); // Separador visual
 
-    // Movimento da RAINHA usando DO-WHILE
-    // A Rainha vai se mover 8 casas para a esquerda
-    int i3 = 1;
+    printf("Movimento da Torre:\n");
+    movimentoTorre(1); // Inicia o movimento da Torre
+
+    printf("\n"); // Separador visual
+
     printf("Movimento da Rainha:\n");
-    do {
-        printf("Movimento %d - Esquerda\n", i3);
-        i3++;
-    } while (i3 <= 8);
+    movimentoRainha(1); // Inicia o movimento da Rainha
 
     printf("\n"); // Separador visual
 
-    // Movimento do CAVALO usando FOR + WHILE
-    // O Cavalo se move 2 casas para baixo e 1 para a esquerda (em L)
     printf("Movimento do Cavalo:\n");
-
-    for (int m = 1; m <= 1; m++) {
-        int passo = 1;
-
-        // Duas casas para baixo
-        while (passo <= 2) {
-            printf("Movimento %d - Baixo\n", passo);
-            passo++;
-        }
-
-        // Uma casa para a esquerda
-        printf("Movimento 3 - Esquerda\n");
-    }
+    movimentoCavalo(1, 1); // Inicia o movimento do Cavalo
 
     return 0;
 }
